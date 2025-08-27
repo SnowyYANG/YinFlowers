@@ -53,14 +53,14 @@ namespace YinTaohua
                 SteamUserStats.GetStat("sp214", out int stat);
                 if (stat == 1 || DateTime.Now.Month == 2 && DateTime.Now.Day == 14)
                 {
-                    sp214.Visibility = Visibility.Visible;
+                    //sp214.Visibility = Visibility.Visible;
                     if (stat == 0)
                     {
                         SteamUserStats.SetStat("sp214", 1);
                         SteamUserStats.StoreStats();
                     }
                 }
-                if (DateTime.Now.Month == 4 && ((DateTime.Now.Year <= 2022 || DateTime.Now.Year > 2023) && DateTime.Now.Day >=4 && DateTime.Now.Day <= 6 || DateTime.Now.Year == 2023 && DateTime.Now.Day == 5)) sp4.Visibility = Visibility.Visible;
+                if (DateTime.Now.Month == 4 && ((DateTime.Now.Year <= 2022 || DateTime.Now.Year > 2023) && DateTime.Now.Day >=4 && DateTime.Now.Day <= 6 || DateTime.Now.Year == 2023 && DateTime.Now.Day == 5)) /*sp4.Visibility = Visibility.Visible*/;
             }
 
             if (night)
@@ -372,8 +372,8 @@ namespace YinTaohua
         {
             if (Keyboard.IsKeyDown(Key.LeftShift) && Keyboard.IsKeyDown(Key.LeftAlt))
             {
-                sp214.Visibility = Visibility.Visible;
-                sp4.Visibility = Visibility.Visible;
+                //sp214.Visibility = Visibility.Visible;
+                //sp4.Visibility = Visibility.Visible;
             }
         }
 
