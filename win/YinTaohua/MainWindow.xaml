@@ -40,7 +40,7 @@
     <Grid>
         <Grid>
             <Grid x:Name="game" Visibility="Collapsed">
-                <FlowDocumentScrollViewer x:Name="docViewer" PreviewMouseLeftButtonUp="docViewer_MouseLeftButtonUp" SizeChanged="FlowDocumentScrollViewer_SizeChanged" PreviewMouseWheel="FlowDocumentScrollViewer_PreviewMouseWheel">
+                <FlowDocumentScrollViewer x:Name="docViewer" Padding="0,5" Visibility="Collapsed" PreviewMouseLeftButtonUp="docViewer_MouseLeftButtonUp" SizeChanged="FlowDocumentScrollViewer_SizeChanged" PreviewMouseWheel="FlowDocumentScrollViewer_PreviewMouseWheel">
                     <FlowDocument x:Name="doc" Background="{Binding Background,ElementName=mw}" Foreground="{Binding Foreground,ElementName=mw}" MouseLeftButtonDown="doc_MouseLeftButtonDown">
                         <Paragraph TextAlignment="Center" FontSize="24" FontWeight="Bold">阴桃花</Paragraph>
                         <Paragraph x:Name="main" FontSize="20" LineHeight="40" Margin="0"/>
@@ -55,6 +55,68 @@
                             <LineBreak/>
                             <LineBreak/>
                             <LineBreak/>
+                        </Paragraph>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+                <FlowDocumentScrollViewer x:Name="docViewer2" Padding="0,5" Visibility="Collapsed" PreviewMouseLeftButtonUp="docViewer_MouseLeftButtonUp" SizeChanged="FlowDocumentScrollViewer_SizeChanged" PreviewMouseWheel="FlowDocumentScrollViewer_PreviewMouseWheel">
+                    <FlowDocument x:Name="doc2" Background="{Binding Background,ElementName=mw}" Foreground="{Binding Foreground,ElementName=mw}" MouseLeftButtonDown="doc_MouseLeftButtonDown">
+                        <Paragraph TextAlignment="Center" FontSize="24" FontWeight="Bold">阴桃花</Paragraph>
+                        <Paragraph>
+                            老公去世的消息传来时，我并没有哭，感觉是时间卡住了很久很久，然后，就这样了。
+                            <LineBreak/>
+                            说到底他本来心脏就不好，自己要去打篮球的。
+                            <LineBreak/>
+                            怎么告诉10岁不到的孩子，倒是让我伤透了神，好在最后孩子也接受了。
+                        </Paragraph>
+
+                        <Paragraph>
+                            从他去世那天起我就每晚都能梦见他，一如既往地在一起有说有笑，整理家居收拾床铺，梦里知道是梦，偶尔我也埋怨他干嘛要去剧烈运动。
+                            <LineBreak/>
+                            今天从他的温暖怀抱中醒来，点亮手机看到几条信息——
+                            <LineBreak/>
+                            公司解散了，账上不够N+1……
+                        </Paragraph>
+
+                        <Paragraph>
+                            39岁的我，没什么学历和技能，海投简历也毫无结果，存款则是每天都在减少。
+                            <LineBreak/>
+                            孩子也快初中毕业了。
+                            <LineBreak/>
+                            父母说，忘了他，再嫁个人吧。
+                        </Paragraph>
+
+                        <Paragraph>
+                            “要不然以后我不来你梦里了，感觉也是在耽误你。”
+                            <LineBreak/>
+                            梦里听到这句准告别，我半天说不出话，只来来回回地抚摸他的肩。
+                            <LineBreak/>
+                            那熟悉的温柔，那优雅的流线，就是醒来之后无法倚靠。
+                            <LineBreak/>
+                            “不要再次离开我。”
+                        </Paragraph>
+
+                        <Paragraph>
+                            婆婆来看孩子，也只是叹气，她也没钱。
+                            <LineBreak/>
+                            说起来，为了钱找人结婚，算不算一种“钱色交易”？和那违法的职业好像也没什么分别。
+                            <LineBreak/>
+                            我看着镜子里的自己，好久没化妆，脸不是很老。
+                        </Paragraph>
+
+                        <Paragraph>
+                            看到这段文字的你啊，不要过问这结局。
+                            <LineBreak/>
+                            不要问我后来是不是改嫁了，不要问他是不是从梦里消失了。
+                            <LineBreak/>
+                            也不要问我现在是在捡纸壳，还是在领低保。
+                            <LineBreak/>
+                            我的选择，我的人生，对你并不重要。
+                            <LineBreak/>
+                            只祈愿世上少一点生离死别，少一点疾病困苦，莫要叫人后悔来到这世界。
+                        </Paragraph>
+
+                        <Paragraph>
+                            （终）
                         </Paragraph>
                     </FlowDocument>
                 </FlowDocumentScrollViewer>
@@ -103,7 +165,7 @@
                                     <!--<TextBlock.Effect>
                                         <BlurEffect Radius="2"/>
                                     </TextBlock.Effect>-->
-                                    <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" Click="game_Click">开始</Hyperlink>
+                                    <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" Click="games_Click">开始</Hyperlink>
                                 </TextBlock>
                                 <TextBlock Margin="5" HorizontalAlignment="Center">
                                     <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" Click="mth_Click">梦桃花</Hyperlink>
@@ -120,14 +182,27 @@
                                     </TextBlock>
                                 </StackPanel-->
                             </StackPanel>
+                            <StackPanel x:Name="games" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" Margin="5">
+                                    <Hyperlink Click="game_Click" Foreground="{Binding Foreground,ElementName=mw}">本篇</Hyperlink>
+                                </TextBlock>
+                                <Border BorderBrush="{Binding Foreground,ElementName=mw}" BorderThickness="1.5" Margin="5">
+                                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,-2">
+                                        <Hyperlink Click="game2_Click" Foreground="{Binding Foreground,ElementName=mw}" TextDecorations="None">中元篇</Hyperlink>
+                                    </TextBlock>
+                                </Border>
+                                <TextBlock HorizontalAlignment="Center" Margin="5">
+                                    <Hyperlink Foreground="#888" Click="games_Click">返回</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
                             <StackPanel x:Name="mth" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
-                                <TextBlock Background="#333" HorizontalAlignment="Center">
+                                <TextBlock Background="#333" HorizontalAlignment="Center" Margin="5">
                                     <Hyperlink Foreground="#fff" Click="m2025_Click">乙巳清明版</Hyperlink>
                                 </TextBlock>
-                                <TextBlock HorizontalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" Margin="5">
                                     <Hyperlink Foreground="#e8f" Click="meng_Click">甲辰七夕版</Hyperlink>
                                 </TextBlock>
-                                <TextBlock HorizontalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" Margin="5">
                                     <Hyperlink Foreground="#888" Click="mth_Click">返回</Hyperlink>
                                 </TextBlock>
                             </StackPanel>

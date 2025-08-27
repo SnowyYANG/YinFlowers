@@ -198,9 +198,19 @@ namespace YinTaohua
         private void game_Click(object sender, RoutedEventArgs e)
         {
             game.Visibility = Visibility.Visible;
+            docViewer.Visibility = Visibility.Visible;
+            docViewer2.Visibility = Visibility.Collapsed;
             cover.Visibility = Visibility.Collapsed;
             lastUi = game;
             Story.Restart();
+        }
+        private void game2_Click(object sender, RoutedEventArgs e)
+        {
+            game.Visibility = Visibility.Visible;
+            docViewer2.Visibility = Visibility.Visible;
+            docViewer.Visibility = Visibility.Collapsed;
+            cover.Visibility = Visibility.Collapsed;
+            lastUi = game;
         }
 
         private void sp214_Click(object sender, RoutedEventArgs e)
@@ -217,7 +227,7 @@ namespace YinTaohua
 
         private void snowy_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://snowyyang.com");
+            System.Diagnostics.Process.Start("https://snowyyang.me");
         }
 
         private void night_Click(object sender, RoutedEventArgs e)
@@ -386,6 +396,12 @@ namespace YinTaohua
             var t = m0.Visibility;
             m0.Visibility = mth.Visibility;
             mth.Visibility = t;
+        }
+        private void games_Click(object sender, RoutedEventArgs e)
+        {
+            var t = m0.Visibility;
+            m0.Visibility = games.Visibility;
+            games.Visibility = t;
         }
         private void m2025_Click(object sender, RoutedEventArgs e)
         {
