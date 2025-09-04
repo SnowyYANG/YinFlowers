@@ -6,6 +6,7 @@
     <Application.Resources>
         <Style TargetType="FlowDocument">
             <Setter Property="FontFamily" Value="思源宋体 CN"/>
+            <Setter Property="FontSize" Value="20"/>
         </Style>
     </Application.Resources>
 </Application>
