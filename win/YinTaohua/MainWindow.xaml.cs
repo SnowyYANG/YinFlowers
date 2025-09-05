@@ -391,17 +391,11 @@ namespace YinTaohua
         {
             new Meng2024().Show();
         }
-        private void mth_Click(object sender, RoutedEventArgs e)
+        private void fullmenu_Click(object sender, RoutedEventArgs e)
         {
-            var t = m0.Visibility;
-            m0.Visibility = mth.Visibility;
-            mth.Visibility = t;
-        }
-        private void games_Click(object sender, RoutedEventArgs e)
-        {
-            var t = m0.Visibility;
-            m0.Visibility = games.Visibility;
-            games.Visibility = t;
+            var t = fullmenu.Visibility;
+            fullmenu.Visibility = m0.Visibility;
+            m0.Visibility = t;
         }
         private void m2025_Click(object sender, RoutedEventArgs e)
         {
