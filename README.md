@@ -1,6 +1,6 @@
-# 阴桃花 (Yin Peach Blossom)
+# 阴桃花 (The Yin Flowers)
 
-**Yin Peach Blossom** is an interactive novel that utilizes the syntax of ink. 
+**The Yin Flowers** is an interactive novel that utilizes the syntax of ink. 
 
 ## Project Structure
 
