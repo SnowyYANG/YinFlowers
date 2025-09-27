@@ -1,6 +1,6 @@
-# 阴桃花 (The Yin Flowers)
+# 阴桃花 (The Flowers of Yin)
 
-**The Yin Flowers** is an interactive novel that utilizes the syntax of ink. 
+**The Flowers of Yin** is an interactive novel that utilizes the syntax of ink. 
 
 ## Project Structure
 
