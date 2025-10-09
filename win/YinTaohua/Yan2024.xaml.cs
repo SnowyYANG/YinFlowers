@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,22 @@ namespace YinTaohua
 
                 e.Handled = true;
             }
+        }
+
+        static readonly string particles = "吗嘛么喵";
+        static readonly string[] emoji = new string[] { "///", "XD", "OwO" };
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            for (int n = new Random().Next(1, 5); n >= 0; n--)
+            {
+                if (MessageBox.Show($"真的要关闭{particles[new Random().Next(0, particles.Length)]}？", "魇桃花", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("这才对嘛！请继续欣赏“魇桃花”" + emoji[new Random().Next(0, emoji.Length)]);
+                    return;
+                }
+            }
+            base.OnClosing(e);
         }
     }
 }
