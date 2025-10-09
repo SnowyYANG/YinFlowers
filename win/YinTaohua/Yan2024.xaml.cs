@@ -76,7 +76,7 @@ namespace YinTaohua
         protected override void OnClosing(CancelEventArgs e)
         {
             double r = new Random().NextDouble();
-            for (int n = r < 0.05 ? 1 : (int)(r * 3) + 2; n >= 0; n--)
+            for (int n = r < 0.05 ? 1 : (int)(r * 3) + 2; n > 0; n--)
             {
                 if (MessageBox.Show($"真的要关闭{particles[new Random().Next(0, particles.Length)]}？", "魇桃花", MessageBoxButton.YesNo) == MessageBoxResult.No)
                 {
