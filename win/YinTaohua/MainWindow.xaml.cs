@@ -192,7 +192,7 @@ namespace YinTaohua
         {
             EndHallu();
             lastUi.Visibility = Visibility.Collapsed;
-            cover.Visibility = Visibility.Visible;
+            mainUI.Visibility = Visibility.Visible;
         }
 
         private void game_Click(object sender, RoutedEventArgs e)
@@ -200,7 +200,7 @@ namespace YinTaohua
             game.Visibility = Visibility.Visible;
             docViewer.Visibility = Visibility.Visible;
             docViewer2.Visibility = Visibility.Collapsed;
-            cover.Visibility = Visibility.Collapsed;
+            mainUI.Visibility = Visibility.Collapsed;
             lastUi = game;
             Story.Restart();
         }
@@ -209,25 +209,25 @@ namespace YinTaohua
             game.Visibility = Visibility.Visible;
             docViewer2.Visibility = Visibility.Visible;
             docViewer.Visibility = Visibility.Collapsed;
-            cover.Visibility = Visibility.Collapsed;
+            mainUI.Visibility = Visibility.Collapsed;
             lastUi = game;
         }
 
         private void sp214_Click(object sender, RoutedEventArgs e)
         {
             if (SteamUserStats.GetAchievement("te", out bool a) && a) new Sp214Window().Show();
-            else MessageBox.Show("通关某个结局后解锁");
+            else MessageBox.Show("达成本篇某个结局后解锁");
         }
 
         private void sp4_Click(object sender, RoutedEventArgs e)
         {
             if (SteamUserStats.GetAchievement("be", out bool a) && a) new Sp4Window().Show();
-            else MessageBox.Show("通关某个结局后解锁");
+            else MessageBox.Show("达成本篇某个结局后解锁");
         }
 
         private void snowy_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://snowyyang.me");
+            System.Diagnostics.Process.Start("mailto:snowyyang@outlook.com");
         }
 
         private void night_Click(object sender, RoutedEventArgs e)
@@ -235,12 +235,12 @@ namespace YinTaohua
             if (night.IsChecked == true)
             {
                 Foreground = Brushes.White;
-                Background = Brushes.Black;
+                mainUI.Background = Brushes.Black;
             }
             else
             {
                 Foreground = Brushes.Black;
-                Background = Brushes.White;
+                mainUI.Background = Brushes.White;
             }
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -323,7 +323,7 @@ namespace YinTaohua
                     for (int j = 0; j < tn; j++) s += "听";
                 }
                 var i = 0;
-                while (i < random.Next(5) && hallu.Children.Count < m) hallu.Children.Add(new TextBlock() { Text = s, Opacity = random.NextDouble() });
+                while (i < random.Next(5) && hallu.Children.Count < m) hallu.Children.Add(new TextBlock() { Text = s, FontSize = doc.FontSize, Opacity = random.NextDouble() });
                 foreach (TextBlock t in hallu.Children)
                 {
                     Canvas.SetLeft(t, random.NextDouble()*(e.NewSize.Width + 100d) - 50d);
@@ -391,12 +391,6 @@ namespace YinTaohua
         {
             new Meng2024().Show();
         }
-        private void fullmenu_Click(object sender, RoutedEventArgs e)
-        {
-            var t = fullmenu.Visibility;
-            fullmenu.Visibility = m0.Visibility;
-            m0.Visibility = t;
-        }
         private void m2025_Click(object sender, RoutedEventArgs e)
         {
             new Meng2025().Show();
@@ -404,7 +398,7 @@ namespace YinTaohua
         private void yan_Click(object sender, RoutedEventArgs e)
         {
             if (SteamUserStats.GetAchievement("persuade", out bool a) && a) new Yan2024().Show();
-            else MessageBox.Show("通关某个结局后解锁");
+            else MessageBox.Show("达成本篇某个结局后解锁");
         }
     }
 }

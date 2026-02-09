@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YinTaohua"
         mc:Ignorable="d"
-        x:Name ="mw" Title="阴桃花" FontFamily="思源宋体 CN" FontSize="20" xml:lang="zh-Hans">
+        x:Name ="mw" Title="阴桃花" FontFamily="思源宋体 CN" Width="750" Height="450" FontSize="20" xml:lang="zh-Hans" Background="#ccc">
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard x:Name="poem">
+            <BeginStoryboard x:Name="loading">
                 <Storyboard>
-                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="load" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="poem" Storyboard.TargetProperty="Opacity">
                         <LinearDoubleKeyFrame KeyTime="0:0" Value="0"/>
-                        <LinearDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="load" Storyboard.TargetProperty="Opacity">
                         <LinearDoubleKeyFrame KeyTime="0:0:3.5" Value="1"/>
-                        <LinearDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+                        <LinearDoubleKeyFrame KeyTime="0:0:4.5" Value="0"/>
                     </DoubleAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="load" Storyboard.TargetProperty="Visibility">
                         <DiscreteObjectKeyFrame KeyTime="0:0:4">
@@ -23,29 +25,27 @@
                             </DiscreteObjectKeyFrame.Value>
                         </DiscreteObjectKeyFrame>
                     </ObjectAnimationUsingKeyFrames>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="menu" Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0:0:4">
-                            <DiscreteObjectKeyFrame.Value>
-                                <Visibility>Visible</Visibility>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-                    </ObjectAnimationUsingKeyFrames>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
         <EventTrigger RoutedEvent="MouseLeftButtonDown" SourceName="load">
-            <SkipStoryboardToFill BeginStoryboardName="poem"/>
+            <SkipStoryboardToFill BeginStoryboardName="loading"/>
         </EventTrigger>
     </Window.Triggers>
-    <Grid>
-        <Grid>
+    <Grid MinWidth="720">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MinWidth="180"/>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="1*" MinWidth="180"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Background="{Binding Background,ElementName=mainUI}">
             <Grid x:Name="game" Visibility="Collapsed">
                 <FlowDocumentScrollViewer x:Name="docViewer" Padding="0,5" Visibility="Collapsed" PreviewMouseLeftButtonUp="docViewer_MouseLeftButtonUp" SizeChanged="FlowDocumentScrollViewer_SizeChanged" PreviewMouseWheel="FlowDocumentScrollViewer_PreviewMouseWheel">
-                    <FlowDocument x:Name="doc" Background="{Binding Background,ElementName=mw}" Foreground="{Binding Foreground,ElementName=mw}" MouseLeftButtonDown="doc_MouseLeftButtonDown">
-                        <Paragraph TextAlignment="Center" FontSize="24" FontWeight="Bold">阴桃花</Paragraph>
-                        <Paragraph x:Name="main" FontSize="20" LineHeight="40" Margin="0"/>
-                        <Paragraph x:Name="choiceMenu" TextAlignment="Center" FontSize="20" LineHeight="40" Margin="0"/>
-                        <Paragraph x:Name="end1" TextAlignment="Right" FontSize="20" LineHeight="40" Margin="0">（终）</Paragraph>
+                    <FlowDocument x:Name="doc" FontSize="16" LineHeight="32" Background="{Binding Background,ElementName=mainUI}" Foreground="{Binding Foreground,ElementName=mw}" MouseLeftButtonDown="doc_MouseLeftButtonDown">
+                        <Paragraph TextAlignment="Center" FontSize="20" FontWeight="Bold">阴桃花</Paragraph>
+                        <Paragraph x:Name="main" Margin="0"/>
+                        <Paragraph x:Name="choiceMenu" TextAlignment="Center" Margin="0"/>
+                        <Paragraph x:Name="end1" TextAlignment="Right" Margin="0">（终）</Paragraph>
                         <Paragraph x:Name="end2" TextAlignment="Center" Foreground="Gray" Margin="0">
                             <Run Text="点击带下划线文本可以重新选择" Foreground="#808080"/>
                             <LineBreak/>
@@ -59,8 +59,8 @@
                     </FlowDocument>
                 </FlowDocumentScrollViewer>
                 <FlowDocumentScrollViewer x:Name="docViewer2" Padding="0,5" Visibility="Collapsed" PreviewMouseLeftButtonUp="docViewer_MouseLeftButtonUp" SizeChanged="FlowDocumentScrollViewer_SizeChanged" PreviewMouseWheel="FlowDocumentScrollViewer_PreviewMouseWheel">
-                    <FlowDocument x:Name="doc2" Background="{Binding Background,ElementName=mw}" Foreground="{Binding Foreground,ElementName=mw}" MouseLeftButtonDown="doc_MouseLeftButtonDown">
-                        <Paragraph TextAlignment="Center" FontSize="24" FontWeight="Bold">阴桃花</Paragraph>
+                    <FlowDocument x:Name="doc2" FontSize="16" LineHeight="32" Background="{Binding Background,ElementName=mainUI}" Foreground="{Binding Foreground,ElementName=mw}" MouseLeftButtonDown="doc_MouseLeftButtonDown">
+                        <Paragraph TextAlignment="Center" FontSize="20" FontWeight="Bold">阴桃花</Paragraph>
                         <Paragraph>
                             老公去世的消息传来时，我并没有哭，感觉是时间卡住了很久很久，然后，就这样了。
                             <LineBreak/>
@@ -120,139 +120,122 @@
                         </Paragraph>
                     </FlowDocument>
                 </FlowDocumentScrollViewer>
-                <Canvas x:Name="hallu" Visibility="Collapsed" SizeChanged="hallu_SizeChanged" Opacity="0.3" IsHitTestVisible="False"/>
-                <CheckBox x:Name="halluSwitch" Click="hallu_Click" Visibility="Collapsed" Content="幻听特效" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{Binding Background,ElementName=mw}" Foreground="{Binding Foreground,ElementName=mw}" Padding="0,-6,10,3" Margin="0,12,0,0"/>
             </Grid>
-            <TextBlock FontSize="16" Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Top"><Hyperlink Click="mainmenu_Click">返回主界面</Hyperlink></TextBlock>
+            <TextBlock FontSize="16" Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Hyperlink Click="mainmenu_Click">返回主界面</Hyperlink>
+            </TextBlock>
         </Grid>
-        <Grid x:Name="cover" Background="{Binding Background,ElementName=mw}">
-            <Viewbox>
-                <Grid Width="720" Height="405">
-                    <Grid x:Name="menu" Visibility="Hidden">
-                        <TextBlock Text="阴桃花" IsHitTestVisible="False" Foreground="#fec8ff" FontSize="60" HorizontalAlignment="Center" Margin="0,80,0,0">
-                            <TextBlock.Effect>
-                                <BlurEffect Radius="60"/>
-                            </TextBlock.Effect>
+        <Grid x:Name="mainUI" Grid.Column="1" Background="White">
+            <Grid Grid.Column="1" x:Name="menu" HorizontalAlignment="Center">
+                <StackPanel x:Name="fullmenu" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock HorizontalAlignment="Center" Margin="5" FontWeight="Bold">阴桃花</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5">
+                        <Hyperlink Click="game_Click" Foreground="#0af">本篇</Hyperlink>
+                    </TextBlock>
+                    <TextBlock x:Name="sp214"  Margin="5" HorizontalAlignment="Center">
+                        <Hyperlink Foreground="#fec8ff" Click="sp214_Click">情人节特典</Hyperlink>
+                    </TextBlock>
+                    
+                    <TextBlock></TextBlock>
+                    
+                    <Grid MouseLeftButtonDown="game2_Click" Margin="5" HorizontalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,-2">
+                            <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" TextDecorations="None">中元篇</Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="阴桃花" IsHitTestVisible="False" Foreground="#fec8ff" FontSize="60" HorizontalAlignment="Center" Margin="0,80,0,0">
-                            <TextBlock.Effect>
-                                <BlurEffect Radius="60"/>
-                            </TextBlock.Effect>
+                        <Border Background="Transparent" BorderBrush="{Binding Foreground,ElementName=mw}">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Opacity" Value="0.5"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>                                        
+                        </Border>
+                    </Grid>
+                    <StackPanel Width="150">
+                        <TextBlock Margin="5" HorizontalAlignment="Center">
+                            <Hyperlink Foreground="#f00" Click="yan_Click">if篇</Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="阴桃花" IsHitTestVisible="False" Foreground="#fec8ff" FontSize="60" HorizontalAlignment="Center" Margin="0,80,0,0">
-                            <TextBlock.Effect>
-                                <BlurEffect Radius="60"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                        <TextBlock Text="阴桃花" IsHitTestVisible="False" Foreground="#ffffff" FontSize="60" HorizontalAlignment="Center" Margin="0,80,0,0">
-                            <TextBlock.Effect>
-                                <BlurEffect Radius="30"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                        <TextBlock Text="阴桃花" IsHitTestVisible="False" Foreground="#72c9ff" FontSize="60" HorizontalAlignment="Center" Margin="0,80,0,0">
-                            <TextBlock.Effect>
-                                <BlurEffect Radius="30"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                        <TextBlock Text="阴桃花" MouseRightButtonDown="TextBlock_MouseRightButtonDown" Foreground="{Binding Background,ElementName=mw}" FontSize="60" HorizontalAlignment="Center" Margin="0,80,0,0">
+                    </StackPanel>
+                        
+                    <TextBlock></TextBlock>
+                        
+                    <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#363">番外篇：梦桃花</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5">
+                        <Hyperlink Foreground="#fff" Click="m2025_Click">乙巳清明版</Hyperlink>
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#333" ShadowDepth="0" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5">
+                        <Hyperlink Foreground="#e8f" Click="meng_Click">甲辰七夕版</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="load" Grid.ColumnSpan="3" Background="#ccc">
+                <StackPanel x:Name="poem" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
+                    <TextBlock Text="幻想若非幻想" Foreground="#888"/>
+                    <TextBlock Text="自然可超自然" Foreground="#888"/>
+                    <TextBlock Text="伴我梦中桃花" Foreground="#888"/>
+                    <TextBlock Text="懒识人间滋味" Foreground="#888"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,-60,15,60">
+            <TextBlock IsHitTestVisible="False" Foreground="#fec8ff" FontSize="60" HorizontalAlignment="Center">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="60"/>
+                </TextBlock.Effect>
+                            阴<LineBreak/>桃<LineBreak/>花
+            </TextBlock>
+            <TextBlock IsHitTestVisible="False" Foreground="#fec8ff" FontSize="60" HorizontalAlignment="Center">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="60"/>
+                </TextBlock.Effect>
+                            阴<LineBreak/>桃<LineBreak/>花
+            </TextBlock>
+            <TextBlock IsHitTestVisible="False" Foreground="#fec8ff" FontSize="60" HorizontalAlignment="Center">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="60"/>
+                </TextBlock.Effect>
+                            阴<LineBreak/>桃<LineBreak/>花
+            </TextBlock>
+            <TextBlock IsHitTestVisible="False" Foreground="#ffffff" FontSize="60" HorizontalAlignment="Center">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="30"/>
+                </TextBlock.Effect>
+                            阴<LineBreak/>桃<LineBreak/>花
+            </TextBlock>
+            <TextBlock IsHitTestVisible="False" Foreground="#72c9ff" FontSize="60" HorizontalAlignment="Center">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="30"/>
+                </TextBlock.Effect>
+                            阴<LineBreak/>桃<LineBreak/>花
+            </TextBlock>
+            <TextBlock MouseRightButtonDown="TextBlock_MouseRightButtonDown" Foreground="{Binding Background,ElementName=mw}" FontSize="60" HorizontalAlignment="Center">
                             <!--<TextBlock.Effect>
                                 <BlurEffect Radius="2"/>
                             </TextBlock.Effect>-->
-                        </TextBlock>
-                        <StackPanel x:Name="m0" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,150,0,0" Width="450">
-                            <TextBlock Margin="5"></TextBlock>
-                            <TextBlock Margin="5" HorizontalAlignment="Center" Opacity="0.7">
-                                <!--<TextBlock.Effect>
-                                    <BlurEffect Radius="2"/>
-                                </TextBlock.Effect>-->
-                                <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" Click="fullmenu_Click">开始</Hyperlink>
-                            </TextBlock>
-                            <TextBlock Margin="5"></TextBlock>
-                            <TextBlock Margin="5"></TextBlock>
-                            <TextBlock Margin="5"></TextBlock>
-                            <TextBlock Margin="5"></TextBlock>
-                            <!--StackPanel VerticalAlignment="Center" Visibility="Collapsed">
-                                <TextBlock x:Name="sp214"  Margin="5" HorizontalAlignment="Center" Visibility="Collapsed">
-                                <Hyperlink Foreground="#fec8ff" Click="sp214_Click">情人节特典</Hyperlink>
-                                </TextBlock>
-                                <TextBlock x:Name="sp4" Margin="5" HorizontalAlignment="Center" Visibility="Collapsed">
-                                <Hyperlink Foreground="#72c9ff" Click="sp4_Click">清明节特典</Hyperlink>
-                                </TextBlock>
-                            </StackPanel-->
-                        </StackPanel>
-                        <StackPanel x:Name="fullmenu" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,150,0,0">
-                            <StackPanel Width="150">
-                                <TextBlock Margin="5" HorizontalAlignment="Center">
-                                <Hyperlink Foreground="#f00" Click="yan_Click">魇桃花</Hyperlink>
-                                </TextBlock>
-                            </StackPanel>
-                            <StackPanel Width="150" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center" Margin="5">阴桃花</TextBlock>
-                                <TextBlock HorizontalAlignment="Center" Margin="5">
-                                    <Hyperlink Click="game_Click" Foreground="#0af">本篇</Hyperlink>
-                                </TextBlock>
-                                <Grid MouseLeftButtonDown="game2_Click" Margin="5" HorizontalAlignment="Center">
-                                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,-2">
-                                        <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" TextDecorations="None">中元篇</Hyperlink>
-                                    </TextBlock>
-                                    <Border Background="Transparent" BorderBrush="{Binding Foreground,ElementName=mw}">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Opacity" Value="0.5"/>
-                                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="BorderThickness" Value="1"/>
-                                                        <Setter Property="Opacity" Value="1"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>                                        
-                                    </Border>
-                                </Grid>
-                                <TextBlock Margin="5"></TextBlock>
-                                <TextBlock HorizontalAlignment="Center" Margin="5">
-                                    <Hyperlink Foreground="#888" Click="fullmenu_Click">返回</Hyperlink>
-                                </TextBlock>
-                            </StackPanel>
-                            <StackPanel Width="150" HorizontalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center" Margin="5" Foreground="#363">梦桃花</TextBlock>
-                                <TextBlock HorizontalAlignment="Center" Margin="5">
-                                    <Hyperlink Foreground="#fff" Click="m2025_Click">乙巳清明版</Hyperlink>
-                                    <TextBlock.Effect>
-                                        <DropShadowEffect Color="#333" ShadowDepth="0" Opacity="1"/>
-                                    </TextBlock.Effect>
-                                </TextBlock>
-                                <TextBlock HorizontalAlignment="Center" Margin="5">
-                                    <Hyperlink Foreground="#e8f" Click="meng_Click">甲辰七夕版</Hyperlink>
-                                </TextBlock>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                    <Grid x:Name="load" Opacity="0" Background="{Binding Background,ElementName=mw}">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
-                            <TextBlock Text="十年独窗下  湖畔梦千水"/>
-                            <TextBlock>
-                                <Run Text="桃花" Foreground="#fec8ff"/><Run
-                                Text="鹦鹉舌  "/><Run
-                                Text="勿忘我" Foreground="#72c9ff"/><Run 
-                                Text="额妆"/>
-                            </TextBlock>
-                            <TextBlock Text="缘非因果结  心思祸福酿"/>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="有情诺百世  无姻怨"/>
-                                <TextBlock Text="阴" Foreground="#888"/>
-                                <TextBlock Text="阳"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-            </Viewbox>
-            <TextBlock Opacity="0.75" Text="本游戏不支持Steam界面，解锁成就不会弹窗。" Visibility="{Binding Visibility,ElementName=menu}" Margin="6" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <CheckBox x:Name="night" Content="夜间模式" Click="night_Click" Foreground="{Binding Foreground,ElementName=mw}" Visibility="{Binding Visibility,ElementName=menu}" Margin="0,0,20,0" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            阴<LineBreak/>桃<LineBreak/>花
+            </TextBlock>
         </Grid>
-        <TextBlock Opacity="0.75" FontSize="12" Padding="6" Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Hyperlink Foreground="{Binding Foreground,ElementName=mw}" Click="snowy_Click">©Snowy</Hyperlink>
+        <Canvas x:Name="hallu" Grid.ColumnSpan="3" Visibility="Collapsed" SizeChanged="hallu_SizeChanged" Opacity="0.3" IsHitTestVisible="False"/>
+
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="6">
+            <CheckBox x:Name="night" Content="夜间模式" Click="night_Click" Foreground="{Binding Foreground,ElementName=mw}" Visibility="{Binding Visibility,ElementName=menu}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <CheckBox x:Name="halluSwitch" Click="hallu_Click" Visibility="Collapsed" Content="幻听特效" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{Binding Background,ElementName=mainUI}" Foreground="{Binding Foreground,ElementName=mw}"/>
+        </StackPanel>
+        
+        <TextBlock Grid.ColumnSpan="3" TextAlignment="Right" Foreground="#333" HorizontalAlignment="Right" Opacity="0.75" Visibility="{Binding Visibility,ElementName=menu}" Margin="6" FontSize="12" VerticalAlignment="Bottom">
+            本游戏不支持Steam界面<LineBreak/>解锁成就不会弹窗
+        </TextBlock>
+        <TextBlock Opacity="0.75" FontSize="12" Padding="6" Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Hyperlink Foreground="White" Click="snowy_Click">©Snowy</Hyperlink>
         </TextBlock>
     </Grid>
 </Window>
